@@ -24,8 +24,10 @@ self.addEventListener("push", (event) => {
   event.waitUntil(
     self.registration.showNotification(payload.title, {
       body: payload.body,
-      icon: "/icon.png",
+      icon: "/icon.png", // icon-192x192.png
+      // badge: "/icons/badge.png",
       vibrate: [200, 100, 200],
+      // data: { url: data.url }, // Optional: URL to open when clicked
     })
   );
 });
