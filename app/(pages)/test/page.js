@@ -36,7 +36,7 @@ export default function Test() {
       }
     } catch (error) {
       console.log("requestPushNotification: ", error);
-      holder += "\n-4- " + JSON.stringify(error, null, 2);
+      holder += "\n-4- " + JSON.stringify(error.message, null, 2);
     }
 
     setResult(holder);

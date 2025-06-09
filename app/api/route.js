@@ -31,15 +31,15 @@ export async function GET(request) {
   });
 
   // Send to all subscriptions (for testing)
-  Promise.all(subscriptions.map((sub) => webPush.sendNotification(sub, payload)))
+  return Promise.all(subscriptions.map((sub) => webPush.sendNotification(sub, payload)))
     .then(() => Response.json({ success: true }))
     .catch((err) => {
       console.error("Error sending push:", err);
 
       // Clean up expired/failed subscriptions:
       if (err.statusCode === 410) "removeSubscriptionFromDB(subscription)";
-      return Response.json({ message: "Failed to send push", status: 500 });
+      return Response.json({ message: "Failed to send push: " + err.message, status: 500 });
     });
 
-  return Response.json({ success: true });
+  // return Response.json({ success: true });
 }
