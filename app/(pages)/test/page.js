@@ -6,14 +6,14 @@ import { useState } from "react";
 const key = process.env.NEXT_PUBLIC_VAPID_KEY;
 
 export default function Test() {
-  const { result, setResult } = useState("");
+  const [result, setResult] = useState("");
 
   const requestPushNotification = async () => {
+    let holder = "requestPushNotification";
     try {
       console.log("requestPushNotification");
-      setResult("requestPushNotification");
       const permission = await Notification.requestPermission();
-      setResult(JSON.stringify(permission, null, 2));
+      holder += "\n-1- " + JSON.stringify(permission, null, 2);
 
       if (permission === "granted") {
         const registration = await navigator.serviceWorker.ready;
@@ -21,7 +21,7 @@ export default function Test() {
           userVisibleOnly: true,
           applicationServerKey: urlBase64ToUint8Array(key), // From `web-push generate-vapid-keys`
         });
-        setResult(JSON.stringify(subscription, null, 2));
+        holder += "\n-2- " + JSON.stringify(subscription, null, 2);
 
         console.log("Push subscription:", subscription);
 
@@ -30,13 +30,16 @@ export default function Test() {
           method: "POST",
           body: JSON.stringify(subscription),
           headers: { "Content-Type": "application/json" },
-        });
+        }).then((res) => res.json());
+
+        holder += "\n-3- " + JSON.stringify(res, null, 2);
       }
-      setResult(JSON.stringify(res, null, 2));
     } catch (error) {
       console.log("requestPushNotification: ", error);
-      setResult(JSON.stringify(error, null, 2));
+      holder += "\n-4- " + JSON.stringify(error, null, 2);
     }
+
+    setResult(holder);
   };
 
   return (
