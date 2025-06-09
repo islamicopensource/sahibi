@@ -1,28 +1,30 @@
 "use client";
-const key = process.env.VAPID_KEY;
-console.log(key);
+
+import { urlBase64ToUint8Array } from "@/app/services/encodin-helper";
+
+const key = process.env.NEXT_PUBLIC_VAPID_KEY;
 
 export default function Test() {
   const requestPushNotification = async () => {
     try {
       console.log("requestPushNotification");
       const permission = await Notification.requestPermission();
-      console.log(permission);
+
       if (permission === "granted") {
         const registration = await navigator.serviceWorker.ready;
         const subscription = await registration.pushManager.subscribe({
           userVisibleOnly: true,
-          applicationServerKey: key, // From `web-push generate-vapid-keys`
+          applicationServerKey: urlBase64ToUint8Array(key), // From `web-push generate-vapid-keys`
         });
 
-        console.log("Push subscription:", subscription);
+        console.log("Push subscription:", subscription.keys);
 
         // Send subscription to your backend (for testing, log it)
-        // await fetch("http://localhost:3000/save-subscription", {
-        //   method: "POST",
-        //   body: JSON.stringify(subscription),
-        //   headers: { "Content-Type": "application/json" },
-        // });
+        await fetch("/api", {
+          method: "POST",
+          body: JSON.stringify(subscription),
+          headers: { "Content-Type": "application/json" },
+        });
       }
     } catch (error) {
       console.log("requestPushNotification: ", error);
