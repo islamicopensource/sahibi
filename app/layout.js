@@ -7,8 +7,8 @@ import Footer from "./components/footer.js";
 import "./globals.css";
 const title = "Some title";
 
-// http://intesab-app.lan
-const origin = process.env.ORIGIN || "http://localhost:3000";
+// http://xxx-app.lan
+const origin = process.env.NEXT_PUBLIC_HOST || "http://localhost:3000";
 
 const kufiFont = localFont({ src: "../public/fonts/NotoKufiArabic-VariableFont_wght.ttf", display: "swap" });
 
@@ -37,7 +37,7 @@ export function generateMetadata() {
     title,
     description: "",
     keywords: title + " ",
-    authors: "Ministry of Interior",
+    authors: "islamicopensource",
     icons: {
       shortcut: { type: "image/ico", sizes: "48x48", url: "/favicon.ico" },
       icon: { type: "image/png", sizes: "16x16", url: "/favicon-16x16.png" },
@@ -55,7 +55,7 @@ export function generateMetadata() {
       title,
       description: "",
       url: origin,
-      siteName: "Intesab",
+      siteName: "xxx",
       images: [{ url: `${origin}/android-chrome-512x512.png`, width: 500, height: 500 }],
       type: "website",
     },
@@ -63,12 +63,12 @@ export function generateMetadata() {
       card: "summary_large_image",
       title,
       description: "",
-      siteId: "146772641985763754987875",
-      creator: "@ArabLocalMarket",
+      siteId: "1467763754345676543987875",
+      creator: "@xxx",
       creatorId: "146772641985763754987875",
       images: [`${origin}/android-chrome-512x512.png`],
     },
-    appleWebApp: { title: "Intesab", statusBarStyle: "black-translucent" },
+    appleWebApp: { title: "xxx", statusBarStyle: "black-translucent" },
   };
 }
 

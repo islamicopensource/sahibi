@@ -1,4 +1,5 @@
 {
+  "id": "some-id-for-xxx-site",
   "name": "xxx",
   "short_name": "xxx",
   "start_url": "/",
@@ -35,9 +36,9 @@
       "sizes": "192x192"
     },
     {
-      "src": "/maskable.png",
+      "src": "/android-chrome-512x512.png",
       "type": "image/png",
-      "sizes": "1000x1000",
+      "sizes": "512x512",
       "purpose": "maskable"
     },
     {
