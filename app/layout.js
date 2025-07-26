@@ -20,7 +20,6 @@ export default async function RootLayout({ children }) {
         <Suspense>
           <StateProvider>
             <Navigation />
-
             <main className="min-h-screen pt-10 pb-24 px-1 sm:px-2 md:px-4 print:min-h-fit" dir="auto">
               {children}
             </main>
