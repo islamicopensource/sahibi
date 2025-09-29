@@ -38,7 +38,7 @@ export function StateProvider({ children }) {
       try {
         // Invoke the native share dialog
         await navigator.share({
-          // title: name,
+          title: "XXX",
           url: window.location.origin,
         });
         console.log("Content shared successfully!");
