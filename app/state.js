@@ -8,7 +8,6 @@ const StateContext = createContext();
 export function StateProvider({ children }) {
   const [messages, setMessages] = useState([]);
   const [user, setUser] = useState({ loading: true });
-  const [err, setErr] = useState("");
 
   const addMessage = (msg) => setMessages([...messages, msg]);
 
@@ -33,30 +32,6 @@ export function StateProvider({ children }) {
     }
   };
 
-  const handleShare = async () => {
-    if (navigator.share) {
-      try {
-        // Invoke the native share dialog
-        await navigator.share({
-          title: "XXX",
-          url: window.location.origin,
-        });
-        console.log("Content shared successfully!");
-      } catch (error) {
-        // Handle errors, including if the user cancels the share
-        console.log("Sharing failed:", error);
-        setErr(error.message);
-      }
-    } else {
-      // Provide a fallback for unsupported browsers
-      console.log("Web Share API not supported.");
-      // You could open a traditional share modal here
-    }
-
-    // localStorage.setItem("shownIosInstallModal", "true");
-    // setOpen(false);
-  };
-
   useEffect(() => {
     // if (!window.localStorage.getItem("accessToken"))  setUser(null);
     // else fetchUser().then(updateUser).catch(()=> setUser(null));
@@ -71,8 +46,6 @@ export function StateProvider({ children }) {
       {children}
       {user.loading && <Loader size="40" wrapperCls="z-9 absolute inset-0 !m-0 bg-blur" />}
       {/* <Messages messages={messages} setMessages={setMessages} /> */}
-
-      <button onClick={handleShare}>Share {err}</button>
     </StateContext.Provider>
   );
 }

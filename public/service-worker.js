@@ -1,5 +1,5 @@
 // self.importScripts('foo.js', 'bar.js');
-const staticFileCacheName = "static-files-v-0xbcy2ye7y3ubfhwvdtw1tye984i0y45plmlplalkom";
+const staticFileCacheName = "static-files-v-0xbcy2ye7y3ubfhwvdtw1tye984it0y45plmlbaplalkom";
 const staticFileCachePaths = [];
 
 self.addEventListener("install", (evt) => {
